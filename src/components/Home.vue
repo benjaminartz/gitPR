@@ -19,7 +19,7 @@
         </v-flex>
         <v-flex xs12>
           <div v-if="apiError" class="red--text">
-            <h4>Invalid URL</h4>
+            <h4>{{ apiError }}</h4>
           </div>
           <div v-else-if="loading">
             <v-progress-circular
@@ -97,7 +97,7 @@ export default {
       ).catch(
         e => {
           this.loading = false
-          this.apiError = true
+          this.apiError = `${e.response.status} ${e.response.statusText} - ${e.response.data.message}`
         }
       )
     }
